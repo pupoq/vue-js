@@ -1,42 +1,33 @@
 
 <template>
 <div>
-    <HTittle />
+    <HeaderTitle v-bind:title='Hello' />
+    <SearchPanel />
 
-
-    <p v-if="isLogin === true">Welcome back!</p>
-    <p v-else>Please, authorize!</p>
-    
-    <p v-show="isLogin">Show example</p>
-
-    <ul>
-      <!-- <li v-for="task in todos">Learn VueJS</li> -->
-      <li>Drink Coffee</li>
-    </ul>
-    <div>
-      <input v-bind:type="passwordVisible?'text':'password'" name="" id="inp"/>
-      <button v-on:click="passwordVisible = !passwordVisible">Button</button>
-    </div>
+    <ToDoList :todos='todos' />
+    <AddFormsTask />
 </div>
 </template>
 
 <script>
 import HeaderTitle from "./components/HeaderTitle.vue";
+import SearchPanel from "./components/SearchPanel.vue";
+import ToDoList from "./components/ToDoList.vue";
+import AddFormsTask from "./components/AddFormsTask.vue";
 export default {
   components: {
-    HTittle: HeaderTitle
+    HeaderTitle,
+    SearchPanel,
+    ToDoList,
+    AddFormsTask
   },
   data(){
     return {
-      title: 'Welcome to my ToDoList',
-      isLogin: false, 
-      todos: ['Learn Vue.js', "Drink Coffee"],
-      passwordVisible: false
+      todos: [
+        {id: 1, text: 'Learn Vue.js'}, 
+        {id: 2, text: "Drink Coffee"}
+      ],
     }
   }
 }
 </script>
-
-<style>
-
-</style>
