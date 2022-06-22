@@ -2,30 +2,41 @@
         <div>     
             <li class="todo_item" :class="{important_task: important, done }">
                 {{text}}
-                <button v-on:click="important = !important">Important</button>
-                <button @click="onDone">Done</button>
-                <button>Delete</button>
+                <button @click='onImportant(id)'>Important</button>
+                <button @click='onDone(id)'>Done</button>
+                <button @click='onDelete(id)'>Delete</button>
             </li>
         </div>
 </template>
 
 <script>
 export default {
+
     props: {
-        text: {type: String, default: "", required: true}
+        text: {type: String, default: "", required: true},
+        important: {type: Boolean, default: false,},
+        done: {type: Boolean, default: false},
+        onDone: Function,
+        onImportant: Function,
+        id: Number,
     },
-    data() {
-        return {
-            important: false,
-            done: true
+    methods:{
+        onDelete(){
+            this.$emit('deleteItem')
         }
-    },
-    methods: {
-        onDone(){
-            this.done = !this.done
-            console.log(this)
-        }
-    }
+    }   
+    // data() {
+    //     return {
+    //         important: false,
+    //         done: true
+    //     }
+    // },
+    // methods: {
+    //     onDone(){
+    //         this.done = !this.done
+    //         console.log(this)
+    //     }
+    // }
 }
 </script>
 
