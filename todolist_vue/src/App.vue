@@ -2,10 +2,10 @@
 <template>
   <div>
       <HeaderTitle />
-      <SearchPanel :value="searchPanel" />
+      <SearchPanel :value="searchValue" @searchOneTask='searchTask'/>
       <FilterButtons :value="status" @change="onChangeStatus"/>
       {{status}}
-      <ToDoList :todos='todos' :onToggleDone="onDone" :onToggleImportant='onImportant' :id='id' @handleDelete='onDelete'/>
+      <ToDoList :todos='foundTasks' :onToggleDone="onDone" :onToggleImportant='onImportant' :id='id' @handleDelete='onDelete'/>
       <AddFormsTask @onAdd='onAdd' @addNewTask="addTask"/>
   </div>
 </template>
@@ -36,13 +36,13 @@
             {id: 3, text: "Drink Water", important: true, done: false}
           ],
           status: 'all',
-          searchPanel: ''
+          searchValue: ''
         }
       },
       computed: {
         foundTasks(){
-          return this.todos.filter((todo) => {
-            todo.text.toLowerCase().includes(this.searchValue.toLowerCase())
+          return this.filterTasks.filter((todo) => {
+            return todo.text.toLowerCase().includes(this.searchValue.toLowerCase())
           })
         },
         filterTasks(){
@@ -87,6 +87,13 @@
           let idx = this.todos.findIndex(item => item.id === id);
           this.todos.splice(idx, 1)
         },
+        searchTask(){
+          for(let item of this.todos){
+            if(this.searchValue == item.text){
+              console.log(this.todos)
+          }
+          }    
+        }
       }
     }
 </script>

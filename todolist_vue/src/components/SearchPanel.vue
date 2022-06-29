@@ -8,10 +8,16 @@
 
 <script>
 export default {
-    emits: ['searchPanel'],
+    props: ['value'],
+    emits: ['searchOneTask'],
     data(){
         return {
-            inp: ''
+            inp: this.props
+        }
+    },
+    methods: {
+        show(){
+            console.log(this.inp)
         }
     }
 }
