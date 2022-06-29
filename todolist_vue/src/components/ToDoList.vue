@@ -1,7 +1,7 @@
 <template>
     <ul>
         <ToDoListitem v-for='item in todos' 
-        :key="item.id" 
+        :key='item.id'
         :text='item.text' 
         :done='item.done' 
         :id='item.id'
